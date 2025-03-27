@@ -1,4 +1,4 @@
 public class Teachers {
     private int teacher_id, department_id;
-    private String first_name, last_name;
+    private String first_name, last_name, department_name;
 }
