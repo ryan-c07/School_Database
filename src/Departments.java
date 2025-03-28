@@ -16,7 +16,8 @@ public class Departments {
     public static void printDepartments (String[] departments, ArrayList<Departments> departmentObjects){
         for (int i = 0; i < departments.length; i++) {
             // INSERT INTO Departments ( departmentID, name ) VALUES ( 1 , 'biology');
-            System.out.println("INSERT INTO Departments ( department_id , name ) VALUES ( " + i + ", '" + departments[i] + "' );");
+            int num = i+1;
+            System.out.println("INSERT INTO Departments ( department_id , name ) VALUES ( " + num + ", '" + departments[i] + "' );");
             departmentObjects.add(new Departments(i, departments[i]));
         }
     }
