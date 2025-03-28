@@ -14,7 +14,6 @@ public class Teachers {
     public static void printTeachers (ArrayList<Teachers> teacherObjects){
         for (int i = 0; i < teacherObjects.size(); i++) {
             Teachers currentTeacher = teacherObjects.get(i);
-            // INSERT INTO Teachers ( departmentID, name ) VALUES ( 1 , 'biology');
             System.out.println("INSERT INTO Teachers ( teacher_id, first_name, last_name, department_id ) VALUES ( " + currentTeacher.teacher_id + ", " +
                     "'" + currentTeacher.first_name + "', '" + currentTeacher.last_name + "', '" + currentTeacher.department_id + "');");
         }
