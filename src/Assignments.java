@@ -5,4 +5,6 @@ public class Assignments {
   private String description;
   //private int assignment_type_id;
   private AssignmentType assignmentType;
+
+  
 }
