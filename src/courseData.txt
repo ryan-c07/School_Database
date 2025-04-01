@@ -1,0 +1,98 @@
+1|Anatomy|3
+2|AP Biology|1
+3|AP Environmental|1
+4|AP Psychology|1
+5|Bioorganic Chemistry|3
+6|Genetics|3
+7|Introduction to Neuroscience|3
+8|Living Environment|2
+9|Living Environment Lab|2
+10|Environmental Sustainability|3
+11|Regents Chemistry|2
+12|AP Chemistry|1
+13|Chemical Engineering|3
+14|Organic Chemistry|3
+15|MICA|3
+16|Quantitative Analysis|3
+17|Forensics|3
+18|Regents Physics|2
+19|Regents Physics Labs|2
+20|AP Physics 1|1
+21|AP Physics 2|1
+22|AP Physics C (Mechanics)|1
+23|AP Physics C (E/M)|1
+24|Astronomy|3
+25|Modern Physics|3
+26|Common Core Algebra|3
+27|Common Core Geometry|3
+28|Common Core Algebra II|3
+29|Pre-Calculus|3
+30|Calculus (non-AP)|3
+31|AP Calculus (AB)|1
+32|AP Calculus (BC)|1
+33|AP Statistics|1
+34|Multivariable Calculus|3
+35|Math Research|3
+36|Linear Algebra|3
+37|AP Computer Science Principles (10th Grade)|1
+38|AP Computer Science A|1
+39|Big Data: Warehousing & Analytics|3
+40|Computer Science & Engineering Home|3
+41|Cyber Security|3
+42|Digital Electronics (Project Lead the Way)|3
+43|Digital Systems Design|3
+44|Electrical Engineering Major|3
+45|Fundamentals of IT Infrastructure|3
+46|Green Building Construction|3
+47|PLTW EDD|3
+48|Statics|3
+49|Strength of Materials|3
+50|Web Development|3
+51|Physical Education|3
+52|Health Education|3
+53|9th Grade English|3
+54|10th Grade English|3
+55|10th Grade: AP Capstone Seminar|1
+56|11th Grade English|3
+57|11th Grade: AP English Language & Composition|1
+58|12th Grade: AP Capstone Research|1
+59|12th Grade: AP English Literature & Composition|1
+60|12th Grade: Creative Writing|3
+61|12th Grade: Drama|3
+62|12th Grade: Film & Literature|3
+63|12th Grade: Journalism|3
+64|12th Grade: Life, Love & Death|3
+65|12th Grade: Mystery, Horror & the Supernatural|3
+66|12th Grade: Science Fiction & Fantasy|3
+67|12th Grade: Yearbook|3
+68|Elective: The Survey (Tech's Student Newspaper)|3
+69|9th Grade Global|3
+70|10th Grade Regents Global History|2
+71|AP World History|1
+72|AP European History|1
+73|11th Grade Regents American History|2
+74|AP American History|1
+75|Participation in Government|3
+76|AP US Government|1
+77|Economics|3
+78|AP Macroeconomics|1
+79|AP Microeconomics|1
+80|AP Comparative Government|1
+81|AP Psychology|1
+82|AP Human Geography|1
+83|Sociology|3
+84|Cultural Anthropology|3
+85|Physical Anthropology|3
+86|Chinese|3
+87|Mandarin Student Resources|3
+88|AP Chinese Language and Culture|1
+89|French|3
+90|AP French Language and Culture|1
+91|German|3
+92|AP German Language and Culture|1
+93|Italian|3
+94|AP Italian Language and Culture|1
+95|Spanish|3
+96|Spanish IV - Pre-AP|3
+97|AP Spanish Language and Culture|1
+98|AP Spanish Literature and Culture|1

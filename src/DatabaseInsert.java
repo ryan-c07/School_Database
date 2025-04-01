@@ -29,6 +29,8 @@ public class DatabaseInsert {
             System.out.println(s);
         }
 
+        MakeCourseArray();
+
     }
     public static ArrayList<Students> generateStudents(){
         ArrayList<Students> students = new ArrayList<>();
@@ -98,5 +100,33 @@ public class DatabaseInsert {
         }
         return teacherObjects;
     }
+
+    public static ArrayList<Courses> MakeCourseArray(){
+        ArrayList<Courses> courseObjects = new ArrayList<>();
+        String filePath = "src/courseData.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                int course_id = Integer.parseInt(line.substring(0, line.indexOf("|")));
+                String name = line.substring(line.indexOf("|") + 1, line.lastIndexOf("|"));
+                int course_type_id = Integer.parseInt(line.substring(line.indexOf("|") + 1));
+                String course_type = "AP";
+                if (course_type_id == 2) {
+                    course_type = "Regents";
+                }
+                else if (course_type_id == 3) {
+                    course_type = "Elective";
+                }
+                Courses new_course = (new Courses(course_id, name, new CourseType(course_type_id, course_type)));
+                courseObjects.add(new_course);
+                System.out.println(new_course);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return courseObjects;
+    }
+
 
 }
