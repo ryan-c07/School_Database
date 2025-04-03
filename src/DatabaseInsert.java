@@ -10,7 +10,7 @@ import java.util.Deque;
 
 public class DatabaseInsert {
     public static String[] departments = {"Chemistry", "Biology", "CTE", "English", "PE", "Mathematics", "Physics", "Social"};
-    public static ArrayList<Teachers> teachersObjects = MakeTeacherArray();
+    public static ArrayList<Teachers> teachersObjects = makeTeacherArray();
 
     public static void main(String[] args) {
         // INSERT INTO Students ( StudentID, Name ) VALUES ( 5000 , 'Student200 ');
@@ -25,12 +25,8 @@ public class DatabaseInsert {
 
 
         Teachers.printTeachers(teachersObjects);
-        for (Students s : totalStudents){
-            System.out.println(s);
-        }
-
-        MakeCourseArray();
-
+        makeCourseArray();
+        makeClassArray();
     }
     public static ArrayList<Students> generateStudents(){
         ArrayList<Students> students = new ArrayList<>();
@@ -71,7 +67,20 @@ public class DatabaseInsert {
         }
         return rooms;
     }
-    public static ArrayList<Teachers> MakeTeacherArray(){
+
+    public static ArrayList<Class> makeClassArray() {
+        ArrayList<Class> classes = new ArrayList<>();
+        ArrayList<Teachers> tempTeachers = makeTeacherArray();
+        int randomNumberOfOfferings = (int) (Math.random() * (5) + 1);
+        System.out.println(randomNumberOfOfferings);
+        for (int i = 0; i < randomNumberOfOfferings; i++) {
+            Teachers randomTeacher = tempTeachers.get((int) (Math.random() * (tempTeachers.size() + 1) + 0));
+            System.out.println(randomTeacher);
+        }
+        return classes;
+    }
+
+    public static ArrayList<Teachers> makeTeacherArray(){
         ArrayList<Teachers> teacherObjects = new ArrayList<>();
         boolean isNotATeacher = false;
         int currentDepartmentId = 0;
@@ -101,7 +110,7 @@ public class DatabaseInsert {
         return teacherObjects;
     }
 
-    public static ArrayList<Courses> MakeCourseArray(){
+    public static ArrayList<Courses> makeCourseArray(){
         ArrayList<Courses> courseObjects = new ArrayList<>();
         String filePath = "src/courseData.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -119,7 +128,6 @@ public class DatabaseInsert {
                 }
                 Courses new_course = (new Courses(course_id, name, new CourseType(course_type_id, course_type)));
                 courseObjects.add(new_course);
-                System.out.println(new_course);
             }
             Courses.printCourses(courseObjects);
         } catch (IOException e) {
