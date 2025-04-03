@@ -13,10 +13,18 @@ public class Courses {
     }
 
 
-    public static void printCourses (String[] courses, ArrayList<Courses> courseObjects, CourseType course_type_id){
-        for (int i = 0; i < courses.length; i++) {
-            System.out.println("INSERT INTO Courses ( course_id , name, course_type_id ) VALUES ( " + i + ", '" + courses[i] + "'" + ", " + course_type_id.getCourse_type_id() + " );");
-            courseObjects.add(new Courses(i, courses[i], course_type_id));
+    public static void printCourses (ArrayList<Courses> courseObjects){
+        for (int i = 0; i < courseObjects.size(); i++) {
+            System.out.println("INSERT INTO Courses ( course_id, name, course_type_id ) VALUES ( " + courseObjects.get(i).course_id + ", '" + courseObjects.get(i).name + "'" + ", " + courseObjects.get(i).course_type_id.getCourse_type_id() + " );");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Courses{" +
+                "course_id=" + course_id +
+                ", name='" + name + '\'' +
+                ", course_type_id=" + course_type_id +
+                '}';
     }
 }

@@ -109,7 +109,7 @@ public class DatabaseInsert {
             while ((line = br.readLine()) != null) {
                 int course_id = Integer.parseInt(line.substring(0, line.indexOf("|")));
                 String name = line.substring(line.indexOf("|") + 1, line.lastIndexOf("|"));
-                int course_type_id = Integer.parseInt(line.substring(line.indexOf("|") + 1));
+                int course_type_id = Integer.parseInt(line.substring(line.lastIndexOf("|") + 1));
                 String course_type = "AP";
                 if (course_type_id == 2) {
                     course_type = "Regents";
@@ -120,8 +120,8 @@ public class DatabaseInsert {
                 Courses new_course = (new Courses(course_id, name, new CourseType(course_type_id, course_type)));
                 courseObjects.add(new_course);
                 System.out.println(new_course);
-
             }
+            Courses.printCourses(courseObjects);
         } catch (IOException e) {
             e.printStackTrace();
         }
