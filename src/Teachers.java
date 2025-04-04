@@ -19,6 +19,22 @@ public class Teachers {
         }
     }
 
+    public int getTeacher_id() {
+        return teacher_id;
+    }
+
+    public void setTeacher_id(int teacher_id) {
+        this.teacher_id = teacher_id;
+    }
+
+    public int getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(int department_id) {
+        this.department_id = department_id;
+    }
+
     @Override
     public String toString() {
         return teacher_id + "|" + department_id + "|" + first_name + "|" + last_name;

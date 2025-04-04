@@ -11,6 +11,14 @@ public class Rooms {
         return room_id;
     }
 
+    public int getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(int room_id) {
+        this.room_id = room_id;
+    }
+
     public String toString(){
         return "room_id: " + room_id + ", room_number: " + room_number;
     }

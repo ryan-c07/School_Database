@@ -19,6 +19,22 @@ public class Courses {
         }
     }
 
+    public int getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
+    }
+
+    public CourseType getCourse_type_id() {
+        return course_type_id;
+    }
+
+    public void setCourse_type_id(CourseType course_type_id) {
+        this.course_type_id = course_type_id;
+    }
+
     @Override
     public String toString() {
         return "Courses{" +
@@ -27,4 +43,6 @@ public class Courses {
                 ", course_type_id=" + course_type_id +
                 '}';
     }
+
+
 }

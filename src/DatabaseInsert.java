@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashMap;
 
 
 public class DatabaseInsert {
@@ -25,8 +26,10 @@ public class DatabaseInsert {
 
 
         Teachers.printTeachers(teachersObjects);
-        makeCourseArray();
+        ArrayList<Courses> courseObjects = makeCourseArray();
+        Courses.printCourses(courseObjects);
         makeClassArray();
+
     }
     public static ArrayList<Students> generateStudents(){
         ArrayList<Students> students = new ArrayList<>();
@@ -70,12 +73,34 @@ public class DatabaseInsert {
 
     public static ArrayList<Class> makeClassArray() {
         ArrayList<Class> classes = new ArrayList<>();
-        ArrayList<Teachers> tempTeachers = makeTeacherArray();
-        int randomNumberOfOfferings = (int) (Math.random() * (5) + 1);
-        System.out.println(randomNumberOfOfferings);
-        for (int i = 0; i < randomNumberOfOfferings; i++) {
-            Teachers randomTeacher = tempTeachers.get((int) (Math.random() * (tempTeachers.size() + 1) + 0));
-            System.out.println(randomTeacher);
+        ArrayList<Courses> courses = makeCourseArray();
+        int count = 1; // class id
+        ArrayList<Integer> numOfClassesPerCourse = new ArrayList<>();
+        for (int i = 0; i < courses.size(); i++) {
+            int randomNumberOfOfferings = (int) (Math.random() * (5) + 1);
+            numOfClassesPerCourse.add(randomNumberOfOfferings);
+        }
+        for (int period = 1; period < 11; period++) { // period
+            ArrayList<Rooms> rooms = generateRooms(); // reset rooms
+            ArrayList<Teachers> tempTeachers = makeTeacherArray(); // reset teachers
+            for (int j = 0; j < rooms.size(); j++) { // rooms
+                if (tempTeachers.isEmpty()) { // check if teacher array is empty
+                    break;
+                }
+                Teachers randomTeacher = tempTeachers.get((int) (Math.random() * (tempTeachers.size())));
+                tempTeachers.remove(randomTeacher);
+                Rooms randomRoom = rooms.get((int) (Math.random() * (rooms.size())));
+                rooms.remove(randomRoom);
+                Integer idxRandomCourse = numOfClassesPerCourse.get((int) (Math.random() * (numOfClassesPerCourse.size())));
+                while ( numOfClassesPerCourse.get(idxRandomCourse) == 0 ) {
+                    idxRandomCourse = numOfClassesPerCourse.get((int) (Math.random() * (numOfClassesPerCourse.size()))); // checks if courses offerings is good
+                }
+                Courses randomCourse = courses.get(idxRandomCourse);
+
+
+                classes.add(new Class(count, randomCourse.getCourse_id(), randomTeacher.getTeacher_id(), randomRoom.getRoom_id(), period));
+                count++;
+            }
         }
         return classes;
     }
@@ -129,7 +154,6 @@ public class DatabaseInsert {
                 Courses new_course = (new Courses(course_id, name, new CourseType(course_type_id, course_type)));
                 courseObjects.add(new_course);
             }
-            Courses.printCourses(courseObjects);
         } catch (IOException e) {
             e.printStackTrace();
         }
