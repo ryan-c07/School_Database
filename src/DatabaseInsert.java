@@ -21,7 +21,7 @@ public class DatabaseInsert {
 
 
         for (int i = 1; i <= 5000; i++) {
-            System.out.println("INSERT INTO Students ( student_id, name ) VALUES ( " + i + ", 'Student" + i + "' );");
+            System.out.println("INSERT INTO Student ( student_id, name ) VALUES ( " + i + ", 'Student" + i + "' );");
         }
         ArrayList<Department> departmentObjects = new ArrayList<>();
         Department.printDepartments(departments, departmentObjects);

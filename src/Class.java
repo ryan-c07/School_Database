@@ -16,7 +16,7 @@ public class Class {
   }
   public static void printClasses (ArrayList<Class> classObjects) {
     for (Class currentClass : classObjects){
-      System.out.println("INSERT INTO Courses ( class_id, course_id, teacher_id, room_id, period ) VALUES ( " + currentClass.class_id + ", " + currentClass.course_id + ", " + currentClass.teacher_id + ", " + currentClass.room_id + ", " + currentClass.period + " );");
+      System.out.println("INSERT INTO Class ( class_id, course_id, teacher_id, room_id, period ) VALUES ( " + currentClass.class_id + ", " + currentClass.course_id + ", " + currentClass.teacher_id + ", " + currentClass.room_id + ", " + currentClass.period + " );");
     }
   }
 

@@ -15,7 +15,7 @@ public class Course {
 
     public static void printCourses (ArrayList<Course> courseObjects){
         for (int i = 0; i < courseObjects.size(); i++) {
-            System.out.println("INSERT INTO Courses ( course_id, name, course_type_id ) VALUES ( " + courseObjects.get(i).course_id + ", '" + courseObjects.get(i).name + "'" + ", " + courseObjects.get(i).course_type_id.getCourse_type_id() + " );");
+            System.out.println("INSERT INTO Course ( course_id, name, course_type_id ) VALUES ( " + courseObjects.get(i).course_id + ", '" + courseObjects.get(i).name + "'" + ", " + courseObjects.get(i).course_type_id.getCourse_type_id() + " );");
         }
     }
 
