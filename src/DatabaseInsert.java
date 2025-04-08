@@ -176,7 +176,7 @@ public class DatabaseInsert {
     public static ArrayList<Roster> makeRosterArray(){
         ArrayList<Roster> rosters = new ArrayList<>();
         for ( Student student : studentObjects ){
-            for (int i = 0; i < 11; i++) {
+            for (int i = 0; i < 10; i++) {
                 int period = i+1;
                 Class classObject = HelperMethods.getClass(classObjects, period);
                 Roster roster = new Roster(student.getStudent_id(), classObject.getClass_id());
@@ -186,5 +186,3 @@ public class DatabaseInsert {
         return rosters;
     }
 }
-// test
-
