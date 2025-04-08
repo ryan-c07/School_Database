@@ -1,4 +1,4 @@
-public class Assignments {
+public class Assignment {
   private int assignment_id;
   private int class_id;
   private String title;

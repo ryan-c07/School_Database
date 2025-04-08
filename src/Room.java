@@ -1,9 +1,9 @@
-public class Rooms {
+public class Room {
     private int room_id;
     private String room_number;
 
 
-    public Rooms(int id, String room){
+    public Room(int id, String room){
         room_id = id;
         room_number = room;
     }

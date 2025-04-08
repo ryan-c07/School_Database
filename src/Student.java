@@ -1,8 +1,8 @@
-public class Students {
+public class Student {
     private int student_id, grade_level;
     private String first_name, last_name;
 
-    public Students(String first, String last, int grade, int id){
+    public Student(String first, String last, int grade, int id){
         student_id = id;
         grade_level = grade;
         first_name = first;

@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
-public class Teachers {
+public class Teacher {
     private int teacher_id, department_id;
     private String first_name, last_name;
 
-    public Teachers (int teacher_id, int department_id, String first_name, String last_name){
+    public Teacher(int teacher_id, int department_id, String first_name, String last_name){
         this.teacher_id = teacher_id;
         this.department_id = department_id;
         this.first_name = first_name;
         this.last_name = last_name;
     }
 
-    public static void printTeachers (ArrayList<Teachers> teacherObjects){
+    public static void printTeachers (ArrayList<Teacher> teacherObjects){
         for (int i = 0; i < teacherObjects.size(); i++) {
-            Teachers currentTeacher = teacherObjects.get(i);
+            Teacher currentTeacher = teacherObjects.get(i);
             System.out.println("INSERT INTO Teachers ( teacher_id, first_name, last_name, department_id ) VALUES ( " + currentTeacher.teacher_id + ", " +
                     "'" + currentTeacher.first_name + "', '" + currentTeacher.last_name + "', '" + currentTeacher.department_id + "');");
         }

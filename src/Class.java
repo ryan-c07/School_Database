@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Class {
   private int class_id;
   private int course_id;
@@ -12,9 +14,13 @@ public class Class {
     room_id = roomid;
     period = p;
   }
-
+  public static void printClasses (ArrayList<Class> classObjects) {
+    for (Class currentClass : classObjects){
+      System.out.println("INSERT INTO Courses ( class_id, course_id, teacher_id, room_id, period ) VALUES ( " + currentClass.class_id + ", " + currentClass.course_id + ", " + currentClass.teacher_id + ", " + currentClass.room_id + ", " + currentClass.period + " );");
+    }
+  }
 
   public String toString(){
-    return "class_id: " + class_id + ", course_id: " + course_id + ", teacher_id: " + teacher_id+ ", room_id: " + room_id+ ", period: " + period;
+    return "class_id="+class_id+"|course_id="+course_id+"|teacher_id="+teacher_id+"|room_id="+room_id+"|period"+period;
   }
 }

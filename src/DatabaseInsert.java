@@ -1,112 +1,127 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
 
 
 public class DatabaseInsert {
     public static String[] departments = {"Chemistry", "Biology", "CTE", "English", "PE", "Mathematics", "Physics", "Social"};
-    public static ArrayList<Teachers> teachersObjects = makeTeacherArray();
+    public static ArrayList<Teacher> teacherObjects = makeTeacherArray();
+    public static ArrayList<Class> classObjects = makeClassArray();
+    public static ArrayList<Course> courseObjects = makeCourseArray();
 
     public static void main(String[] args) {
-        // INSERT INTO Students ( StudentID, Name ) VALUES ( 5000 , 'Student200 ');
-        ArrayList<Students> totalStudents = generateStudents();
-        ArrayList<Rooms> totalRooms = generateRooms();
+        printEverything();
+    }
+
+
+    public static void printEverything(){
+        ArrayList<Student> totalStudents = generateStudents();
+        ArrayList<Room> totalRooms = generateRooms();
+
 
         for (int i = 1; i <= 5000; i++) {
             System.out.println("INSERT INTO Students ( student_id, name ) VALUES ( " + i + ", 'Student" + i + "' );");
         }
-        ArrayList<Departments> departmentObjects = new ArrayList<>();
-        Departments.printDepartments(departments, departmentObjects);
+        ArrayList<Department> departmentObjects = new ArrayList<>();
+        Department.printDepartments(departments, departmentObjects);
 
-
-        Teachers.printTeachers(teachersObjects);
-        ArrayList<Courses> courseObjects = makeCourseArray();
-        Courses.printCourses(courseObjects);
-        makeClassArray();
-
+        Teacher.printTeachers(teacherObjects);
+        Course.printCourses(courseObjects);
+        Class.printClasses(classObjects);
     }
-    public static ArrayList<Students> generateStudents(){
-        ArrayList<Students> students = new ArrayList<>();
+
+
+    public static ArrayList<Student> generateStudents(){
+        ArrayList<Student> students = new ArrayList<>();
         for (int i = 1; i <= 5000; i++) {
-            students.add(new Students("Student", Integer.toString(i), (int) (Math.random() * (12 - 9 + 1) + 9), i));
+            students.add(new Student("Student", Integer.toString(i), (int) (Math.random() * (12 - 9 + 1) + 9), i));
         }
         return students;
     }
-    public static ArrayList<Rooms> generateRooms(){
-        ArrayList<Rooms> rooms = new ArrayList<>();
+    public static ArrayList<Room> generateRooms(){
+        ArrayList<Room> rooms = new ArrayList<>();
         int numRooms = 1;
         for (int f = 0; f != 9; f++){
             switch (f) {
                 case 0:
                     for (int r = 1; r != 21; r++){
-                        rooms.add(new Rooms(numRooms, "BN" + r));
+                        rooms.add(new Room(numRooms, "BN" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, "BS" + r));
+                        rooms.add(new Room(numRooms, "BS" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, "BE" + r));
+                        rooms.add(new Room(numRooms, "BE" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, "BW" + r));
+                        rooms.add(new Room(numRooms, "BW" + r));
                         numRooms++;
                     }
                     break;
                 default:
                     for (int r = 1; r != 21; r++){
-                        rooms.add(new Rooms(numRooms, f + "N" + r));
+                        rooms.add(new Room(numRooms, f + "N" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, f + "S" + r));
+                        rooms.add(new Room(numRooms, f + "S" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, f + "E" + r));
+                        rooms.add(new Room(numRooms, f + "E" + r));
                         numRooms++;
-                        rooms.add(new Rooms(numRooms, f + "W" + r));
+                        rooms.add(new Room(numRooms, f + "W" + r));
                         numRooms++;
                     }
             }
         }
         return rooms;
     }
-
     public static ArrayList<Class> makeClassArray() {
         ArrayList<Class> classes = new ArrayList<>();
-        ArrayList<Courses> courses = makeCourseArray();
-        int count = 1; // class id
+        ArrayList<Course> cours = makeCourseArray();
+        int count = 1; // class ID
         ArrayList<Integer> numOfClassesPerCourse = new ArrayList<>();
-        for (int i = 0; i < courses.size(); i++) {
-            int randomNumberOfOfferings = (int) (Math.random() * (5) + 1);
+
+        // fill number of offerings per course with random number
+        for (int i = 0; i < cours.size(); i++ ) {
+            int randomNumberOfOfferings = (int) (Math.random() * 5 + 1); // 1–5
             numOfClassesPerCourse.add(randomNumberOfOfferings);
         }
-        for (int period = 1; period < 11; period++) { // period
-            ArrayList<Rooms> rooms = generateRooms(); // reset rooms
-            ArrayList<Teachers> tempTeachers = makeTeacherArray(); // reset teachers
-            for (int j = 0; j < rooms.size(); j++) { // rooms
-                if (tempTeachers.isEmpty()) { // check if teacher array is empty
-                    break;
+        int maxPerPeriod = HelperMethods.sumOfArray(numOfClassesPerCourse) / 10;
+
+        for ( int period = 1; period < 11; period++ ) { // 10 periods
+            ArrayList<Room> rooms = generateRooms();
+            ArrayList<Teacher> tempTeachers = makeTeacherArray();
+            int offeringsDuringPeriod = 0;
+            for ( int j = 0; j < rooms.size(); j++ ) {
+                if (tempTeachers.isEmpty()) {
+                    break; // all teachers are booked for that period
                 }
-                Teachers randomTeacher = tempTeachers.get((int) (Math.random() * (tempTeachers.size())));
+
+                if (HelperMethods.allZero(numOfClassesPerCourse)) {
+                    break; // all course offerings are used
+                }
+                if (offeringsDuringPeriod == maxPerPeriod){
+                    break; // spreading the periods out
+                }
+                Teacher randomTeacher = tempTeachers.get((int) (Math.random() * tempTeachers.size())); // get a random teacher
                 tempTeachers.remove(randomTeacher);
-                Rooms randomRoom = rooms.get((int) (Math.random() * (rooms.size())));
+
+                Room randomRoom = rooms.get((int) (Math.random() * rooms.size())); // get a random room
                 rooms.remove(randomRoom);
-                Integer idxRandomCourse = numOfClassesPerCourse.get((int) (Math.random() * (numOfClassesPerCourse.size())));
-                while ( numOfClassesPerCourse.get(idxRandomCourse) == 0 ) {
-                    idxRandomCourse = numOfClassesPerCourse.get((int) (Math.random() * (numOfClassesPerCourse.size()))); // checks if courses offerings is good
+
+                int idxRandomCourse = (int) (Math.random() * numOfClassesPerCourse.size()); // get a random course
+                while ( numOfClassesPerCourse.get(idxRandomCourse) == 0 ) { // search for another course if no more offerings left
+                    idxRandomCourse = (int) (Math.random() * numOfClassesPerCourse.size());
                 }
-                Courses randomCourse = courses.get(idxRandomCourse);
+                Course randomCourse = cours.get(idxRandomCourse);
+                numOfClassesPerCourse.set(idxRandomCourse, numOfClassesPerCourse.get(idxRandomCourse) - 1);
 
-
-                classes.add(new Class(count, randomCourse.getCourse_id(), randomTeacher.getTeacher_id(), randomRoom.getRoom_id(), period));
+                Class newClass = new Class(count, randomCourse.getCourse_id(), randomTeacher.getTeacher_id(), randomRoom.getRoom_id(), period);
+                classes.add(newClass);
                 count++;
+                offeringsDuringPeriod++;
             }
         }
         return classes;
     }
-
-    public static ArrayList<Teachers> makeTeacherArray(){
-        ArrayList<Teachers> teacherObjects = new ArrayList<>();
+    public static ArrayList<Teacher> makeTeacherArray(){
+        ArrayList<Teacher> teacherObjects = new ArrayList<>();
         boolean isNotATeacher = false;
         int currentDepartmentId = 0;
         int count = 1;
@@ -124,7 +139,7 @@ public class DatabaseInsert {
                 String firstName = line.substring(0, line.lastIndexOf(" ") + 1).trim();
                 String lastName = line.substring(line.lastIndexOf(" ") + 1);
                 if (!isNotATeacher){
-                    teacherObjects.add(new Teachers(count, currentDepartmentId, firstName, lastName));
+                    teacherObjects.add(new Teacher(count, currentDepartmentId, firstName, lastName));
                 }
                 count++;
                 isNotATeacher = false;
@@ -134,9 +149,8 @@ public class DatabaseInsert {
         }
         return teacherObjects;
     }
-
-    public static ArrayList<Courses> makeCourseArray(){
-        ArrayList<Courses> courseObjects = new ArrayList<>();
+    public static ArrayList<Course> makeCourseArray(){
+        ArrayList<Course> courseObjects = new ArrayList<>();
         String filePath = "src/courseData.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -151,7 +165,7 @@ public class DatabaseInsert {
                 else if (course_type_id == 3) {
                     course_type = "Elective";
                 }
-                Courses new_course = (new Courses(course_id, name, new CourseType(course_type_id, course_type)));
+                Course new_course = (new Course(course_id, name, new CourseType(course_type_id, course_type)));
                 courseObjects.add(new_course);
             }
         } catch (IOException e) {
@@ -159,6 +173,6 @@ public class DatabaseInsert {
         }
         return courseObjects;
     }
-
-
 }
+
+
