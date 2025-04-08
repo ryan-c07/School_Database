@@ -9,6 +9,10 @@ public class Student {
         last_name = last;
     }
 
+    public int getStudent_id() {
+        return student_id;
+    }
+
     public String toString(){
         return "student_id: " + student_id + ", first_name: " + first_name + ", last_name: " + last_name +", grade_level: " + grade_level;
     }

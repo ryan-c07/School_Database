@@ -9,6 +9,8 @@ public class DatabaseInsert {
     public static ArrayList<Teacher> teacherObjects = makeTeacherArray();
     public static ArrayList<Class> classObjects = makeClassArray();
     public static ArrayList<Course> courseObjects = makeCourseArray();
+    public static ArrayList<Student> studentObjects = generateStudents();
+    public static ArrayList<Roster> rosterObjects = makeRosterArray();
 
     public static void main(String[] args) {
         printEverything();
@@ -16,10 +18,7 @@ public class DatabaseInsert {
 
 
     public static void printEverything(){
-        ArrayList<Student> totalStudents = generateStudents();
         ArrayList<Room> totalRooms = generateRooms();
-
-
         for (int i = 1; i <= 5000; i++) {
             System.out.println("INSERT INTO Student ( student_id, name ) VALUES ( " + i + ", 'Student" + i + "' );");
         }
@@ -29,6 +28,7 @@ public class DatabaseInsert {
         Teacher.printTeachers(teacherObjects);
         Course.printCourses(courseObjects);
         Class.printClasses(classObjects);
+        Roster.printRosters(rosterObjects);
     }
 
 
@@ -73,12 +73,12 @@ public class DatabaseInsert {
     }
     public static ArrayList<Class> makeClassArray() {
         ArrayList<Class> classes = new ArrayList<>();
-        ArrayList<Course> cours = makeCourseArray();
+        ArrayList<Course> courses = makeCourseArray();
         int count = 1; // class ID
         ArrayList<Integer> numOfClassesPerCourse = new ArrayList<>();
 
         // fill number of offerings per course with random number
-        for (int i = 0; i < cours.size(); i++ ) {
+        for (int i = 0; i < courses.size(); i++ ) {
             int randomNumberOfOfferings = (int) (Math.random() * 5 + 1); // 1–5
             numOfClassesPerCourse.add(randomNumberOfOfferings);
         }
@@ -109,7 +109,7 @@ public class DatabaseInsert {
                 while ( numOfClassesPerCourse.get(idxRandomCourse) == 0 ) { // search for another course if no more offerings left
                     idxRandomCourse = (int) (Math.random() * numOfClassesPerCourse.size());
                 }
-                Course randomCourse = cours.get(idxRandomCourse);
+                Course randomCourse = courses.get(idxRandomCourse);
                 numOfClassesPerCourse.set(idxRandomCourse, numOfClassesPerCourse.get(idxRandomCourse) - 1);
 
                 Class newClass = new Class(count, randomCourse.getCourse_id(), randomTeacher.getTeacher_id(), randomRoom.getRoom_id(), period);
@@ -172,6 +172,18 @@ public class DatabaseInsert {
             e.printStackTrace();
         }
         return courseObjects;
+    }
+    public static ArrayList<Roster> makeRosterArray(){
+        ArrayList<Roster> rosters = new ArrayList<>();
+        for ( Student student : studentObjects ){
+            for (int i = 0; i < 11; i++) {
+                int period = i+1;
+                Class classObject = HelperMethods.getClass(classObjects, period);
+                Roster roster = new Roster(student.getStudent_id(), classObject.getClass_id());
+                rosters.add(roster);
+            }
+        }
+        return rosters;
     }
 }
 

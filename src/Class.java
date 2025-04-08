@@ -20,6 +20,14 @@ public class Class {
     }
   }
 
+  public int getPeriod() {
+    return period;
+  }
+
+  public int getClass_id() {
+    return class_id;
+  }
+
   public String toString(){
     return "class_id="+class_id+"|course_id="+course_id+"|teacher_id="+teacher_id+"|room_id="+room_id+"|period"+period;
   }
