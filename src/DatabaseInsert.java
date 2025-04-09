@@ -13,7 +13,7 @@ public class DatabaseInsert {
     public static ArrayList<Roster> rosterObjects = makeRosterArray();
 
     public static void main(String[] args) {
-        printEverything();
+        generateGrades();
     }
 
 
@@ -186,6 +186,24 @@ public class DatabaseInsert {
         }
         return rosters;
     }
+    public static ArrayList<Assignment> makeAssignmentsArray(){
+        ArrayList<Class> classes = makeClassArray();
+        ArrayList<Assignment> assignments = new ArrayList<>();
+        for (int i = 0; i < classes.size(); i++) {
+            Class tempClass = classes.get(i);
+            for (int j = 0; j < 15; j++) {
+                if (j < 12) { // MINOR ASSESSMENTS
+                    Assignment newAssignment = new Assignment(j, "Assignment" + j, tempClass.getClass_id(), 1);
+                    assignments.add(newAssignment);
+                }
+                else { // MAJOR ASSESSMENTS
+                    Assignment newAssignment = new Assignment(j, "Assignment" + j, tempClass.getClass_id(), 2);
+                    assignments.add(newAssignment);
+                }
+            }
+        }
+        return assignments;
+    }
     public static void generateAssignments(){
         ArrayList<Class> classes = makeClassArray();
         for (int i = 0; i < classes.size(); i++) {
@@ -197,6 +215,20 @@ public class DatabaseInsert {
                 else { // MAJOR ASSESSMENTS
                     System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + j + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 2 );");
                 }
+            }
+        }
+    }
+    public static void generateGrades(){
+        ArrayList<Assignment> assignments = makeAssignmentsArray();
+        ArrayList<Roster> rosters = makeRosterArray();
+
+        for (int i = 0; i < rosters.size(); i++) {
+            Roster tempRoster = rosters.get(i);
+            int student_id = tempRoster.getStudent_id();
+            for (int j = 0; j < assignments.size(); j++) {
+                Assignment tempAssignment = assignments.get(j);
+                int randomGrade = (int) (Math.random() * 26) + 75;
+                System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + "'" + ", " + randomGrade + " );");
             }
         }
     }
