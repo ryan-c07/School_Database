@@ -13,7 +13,7 @@ public class DatabaseInsert {
     public static ArrayList<Roster> rosterObjects = makeRosterArray();
 
     public static void main(String[] args) {
-        generateGrades();
+        printEverything();
     }
 
 
@@ -30,9 +30,8 @@ public class DatabaseInsert {
         Class.printClasses(classObjects);
         Roster.printRosters(rosterObjects);
         generateAssignments();
+        generateGrades();
     }
-
-
     public static ArrayList<Student> generateStudents(){
         ArrayList<Student> students = new ArrayList<>();
         for (int i = 1; i <= 5000; i++) {
@@ -222,13 +221,16 @@ public class DatabaseInsert {
         ArrayList<Assignment> assignments = makeAssignmentsArray();
         ArrayList<Roster> rosters = makeRosterArray();
 
+
         for (int i = 0; i < rosters.size(); i++) {
             Roster tempRoster = rosters.get(i);
             int student_id = tempRoster.getStudent_id();
             for (int j = 0; j < assignments.size(); j++) {
                 Assignment tempAssignment = assignments.get(j);
-                int randomGrade = (int) (Math.random() * 26) + 75;
-                System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + "'" + ", " + randomGrade + " );");
+                if (tempAssignment.getClass_id() == tempRoster.getClass_id()) {
+                    int randomGrade = (int) (Math.random() * 26) + 75;
+                    System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + "'" + ", " + randomGrade + " );");
+                }
             }
         }
     }
