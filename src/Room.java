@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Room {
     private int room_id;
     private String room_number;
@@ -7,6 +9,15 @@ public class Room {
         room_id = id;
         room_number = room;
     }
+
+    public static void printRooms (ArrayList<Room> totalRooms){
+        for (int i = 0; i < totalRooms.size(); i++) {
+            Room currentRoom = totalRooms.get(i);
+            System.out.println("INSERT INTO Room ( room_id, room_number ) VALUES ( " + currentRoom.room_id + ", '"
+                    + currentRoom.room_number + "' );");
+        }
+    }
+
     public int getID() {
         return room_id;
     }

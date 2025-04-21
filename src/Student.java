@@ -11,6 +11,14 @@ public class Student {
         last_name = last;
     }
 
+    public static void printStudents (ArrayList<Student> studentObjects){
+        for (int i = 0; i < studentObjects.size(); i++) {
+            Student currentStudent = studentObjects.get(i);
+            System.out.println("INSERT INTO Student ( student_id, first_name, last_name, grade_level ) VALUES ( " + currentStudent.student_id + ", " +
+                    "'" + currentStudent.first_name + "', '" + currentStudent.last_name + "', " + currentStudent.grade_level + " );");
+        }
+    }
+
     public int getStudent_id() {
         return student_id;
     }
@@ -18,11 +26,5 @@ public class Student {
     public String toString(){
         return "student_id: " + student_id + ", first_name: " + first_name + ", last_name: " + last_name +", grade_level: " + grade_level;
     }
-    public static void printStudents (ArrayList<Student> studentObjects){
-        for (int i = 0; i < studentObjects.size(); i++) {
-            Student currentStudent = studentObjects.get(i);
-            System.out.println("INSERT INTO Student ( student_id, first_name, last_name, grade_level ) VALUES ( " + currentStudent.student_id + ", " +
-                    "'" + currentStudent.first_name + "', '" + currentStudent.last_name + "', '" + currentStudent.grade_level + "');");
-        }
-    }
+
 }

@@ -11,24 +11,23 @@ public class DatabaseInsert {
     public static ArrayList<Course> courseObjects = makeCourseArray();
     public static ArrayList<Student> studentObjects = generateStudents();
     public static ArrayList<Roster> rosterObjects = makeRosterArray();
+    public static ArrayList<Room> totalRooms = generateRooms();
+    public static ArrayList<Department> departmentObjects = new ArrayList<>();
+
 
     public static void main(String[] args) {
         printEverything();
     }
-
-
     public static void printEverything(){
-//        ArrayList<Room> totalRooms = generateRooms();
         Student.printStudents(studentObjects);
-//        ArrayList<Department> departmentObjects = new ArrayList<>();
-//        Department.printDepartments(departments, departmentObjects);
-//
-//        Teacher.printTeachers(teacherObjects);
-//        Course.printCourses(courseObjects);
-//        Class.printClasses(classObjects);
-//        Roster.printRosters(rosterObjects);
-//        generateAssignments();
-//        generateGrades();
+        Room.printRooms(totalRooms);
+        Department.printDepartments(departments, departmentObjects);
+        Teacher.printTeachers(teacherObjects);
+        Course.printCourses(courseObjects);
+        Class.printClasses(classObjects);
+        Roster.printRosters(rosterObjects);
+        generateAssignments();
+        generateGrades();
     }
     public static ArrayList<Student> generateStudents(){
         ArrayList<Student> students = new ArrayList<>();
@@ -227,7 +226,7 @@ public class DatabaseInsert {
                 Assignment tempAssignment = assignments.get(j);
                 if (tempAssignment.getClass_id() == tempRoster.getClass_id()) {
                     int randomGrade = (int) (Math.random() * 26) + 75;
-                    System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + "'" + ", " + randomGrade + " );");
+                    System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + ", " + randomGrade + " );");
                 }
             }
         }
