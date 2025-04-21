@@ -18,19 +18,17 @@ public class DatabaseInsert {
 
 
     public static void printEverything(){
-        ArrayList<Room> totalRooms = generateRooms();
-        for (int i = 1; i <= 5000; i++) {
-            System.out.println("INSERT INTO Student ( student_id, name ) VALUES ( " + i + ", 'Student" + i + "' );");
-        }
-        ArrayList<Department> departmentObjects = new ArrayList<>();
-        Department.printDepartments(departments, departmentObjects);
-
-        Teacher.printTeachers(teacherObjects);
-        Course.printCourses(courseObjects);
-        Class.printClasses(classObjects);
-        Roster.printRosters(rosterObjects);
-        generateAssignments();
-        generateGrades();
+//        ArrayList<Room> totalRooms = generateRooms();
+        Student.printStudents(studentObjects);
+//        ArrayList<Department> departmentObjects = new ArrayList<>();
+//        Department.printDepartments(departments, departmentObjects);
+//
+//        Teacher.printTeachers(teacherObjects);
+//        Course.printCourses(courseObjects);
+//        Class.printClasses(classObjects);
+//        Roster.printRosters(rosterObjects);
+//        generateAssignments();
+//        generateGrades();
     }
     public static ArrayList<Student> generateStudents(){
         ArrayList<Student> students = new ArrayList<>();
