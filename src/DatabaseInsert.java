@@ -185,32 +185,37 @@ public class DatabaseInsert {
     public static ArrayList<Assignment> makeAssignmentsArray(){
         ArrayList<Class> classes = makeClassArray();
         ArrayList<Assignment> assignments = new ArrayList<>();
+        int assignment_counter = 0;
         for (int i = 0; i < classes.size(); i++) {
             Class tempClass = classes.get(i);
             for (int j = 0; j < 15; j++) {
+
                 if (j < 12) { // MINOR ASSESSMENTS
-                    Assignment newAssignment = new Assignment(j, "Assignment" + j, tempClass.getClass_id(), 1);
+                    Assignment newAssignment = new Assignment(assignment_counter, "Assignment" + j, tempClass.getClass_id(), 1);
                     assignments.add(newAssignment);
                 }
                 else { // MAJOR ASSESSMENTS
-                    Assignment newAssignment = new Assignment(j, "Assignment" + j, tempClass.getClass_id(), 2);
+                    Assignment newAssignment = new Assignment(assignment_counter, "Assignment" + j, tempClass.getClass_id(), 2);
                     assignments.add(newAssignment);
                 }
+                assignment_counter++;
             }
         }
         return assignments;
     }
     public static void generateAssignments(){
         ArrayList<Class> classes = makeClassArray();
+        int assignment_counter = 0;
         for (int i = 0; i < classes.size(); i++) {
             Class tempClass = classes.get(i);
             for (int j = 0; j < 15; j++) {
                 if (j < 12) { // MINOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + j + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 1 );");
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 1 );");
                 }
                 else { // MAJOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + j + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 2 );");
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 2 );");
                 }
+                assignment_counter++;
             }
         }
     }
