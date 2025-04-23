@@ -12,6 +12,7 @@ public class DatabaseInsert {
     public static ArrayList<Student> studentObjects = generateStudents();
     public static ArrayList<Roster> rosterObjects = makeRosterArray();
     public static ArrayList<Room> totalRooms = generateRooms();
+    public static ArrayList<Assignment> assignmentObjects = makeAssignmentsArray();
     public static ArrayList<Department> departmentObjects = new ArrayList<>();
 
 
@@ -182,11 +183,10 @@ public class DatabaseInsert {
         return rosters;
     }
     public static ArrayList<Assignment> makeAssignmentsArray(){
-        ArrayList<Class> classes = makeClassArray();
         ArrayList<Assignment> assignments = new ArrayList<>();
         int assignment_counter = 0;
-        for (int i = 0; i < classes.size(); i++) {
-            Class tempClass = classes.get(i);
+        for (int i = 0; i < classObjects.size(); i++) {
+            Class tempClass = classObjects.get(i);
             for (int j = 0; j < 15; j++) {
 
                 if (j < 12) { // MINOR ASSESSMENTS
@@ -204,32 +204,30 @@ public class DatabaseInsert {
     }
     public static void generateAssignments(){
         int assignment_counter = 0;
-        for (int i = 0; i < classObjects.size(); i++) {
-            Class tempClass = classObjects.get(i);
+        for (int i = 0; i < assignmentObjects.size(); i++) {
+            Assignment tempAssignment = assignmentObjects.get(i);
             for (int j = 0; j < 15; j++) {
                 if (j < 12) { // MINOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 1 );");
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempAssignment.getClass_id() + ", 1 );");
                 }
                 else { // MAJOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 2 );");
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempAssignment.getClass_id() + ", 2 );");
                 }
                 assignment_counter++;
             }
         }
     }
     public static void generateGrades(){
-        ArrayList<Assignment> assignments = makeAssignmentsArray();
-        ArrayList<Roster> rosters = makeRosterArray();
-
-
-        for (int i = 0; i < rosters.size(); i++) {
-            Roster tempRoster = rosters.get(i);
+        int counter = 0;
+        for (int i = 0; i < rosterObjects.size(); i++) {
+            Roster tempRoster = rosterObjects.get(i);
             int student_id = tempRoster.getStudent_id();
-            for (int j = 0; j < assignments.size(); j++) {
-                Assignment tempAssignment = assignments.get(j);
+            for (int j = 0; j < assignmentObjects.size(); j++) {
+                Assignment tempAssignment = assignmentObjects.get(j);
                 if (tempAssignment.getClass_id() == tempRoster.getClass_id()) {
                     int randomGrade = (int) (Math.random() * 26) + 75;
-                    System.out.println("INSERT INTO Grades ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + ", " + randomGrade + " );");
+                    System.out.println("INSERT INTO Grades ( grade_id, assignment_id, student_id, score ) VALUES ( " + counter + ", "+ tempAssignment.getAssignment_id() + ", " + student_id + ", " + randomGrade + " );");
+                    counter++;
                 }
             }
         }
