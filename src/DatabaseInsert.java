@@ -203,10 +203,9 @@ public class DatabaseInsert {
         return assignments;
     }
     public static void generateAssignments(){
-        ArrayList<Class> classes = makeClassArray();
         int assignment_counter = 0;
-        for (int i = 0; i < classes.size(); i++) {
-            Class tempClass = classes.get(i);
+        for (int i = 0; i < classObjects.size(); i++) {
+            Class tempClass = classObjects.get(i);
             for (int j = 0; j < 15; j++) {
                 if (j < 12) { // MINOR ASSESSMENTS
                     System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 1 );");
