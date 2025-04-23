@@ -74,7 +74,6 @@ public class DatabaseInsert {
         int count = 1; // class ID
         ArrayList<Integer> numOfClassesPerCourse = new ArrayList<>();
 
-        // fill number of offerings per course with random number
         for (int i = 0; i < courses.size(); i++ ) {
             int randomNumberOfOfferings = (int) (Math.random() * 5 + 1); // 1–5
             numOfClassesPerCourse.add(randomNumberOfOfferings);
@@ -231,7 +230,7 @@ public class DatabaseInsert {
                 Assignment tempAssignment = assignments.get(j);
                 if (tempAssignment.getClass_id() == tempRoster.getClass_id()) {
                     int randomGrade = (int) (Math.random() * 26) + 75;
-                    System.out.println("INSERT INTO Grade ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + ", " + randomGrade + " );");
+                    System.out.println("INSERT INTO Grades ( assignment_id, student_id, score ) VALUES ( " + tempAssignment.getAssignment_id() + ", " + student_id + ", " + randomGrade + " );");
                 }
             }
         }
