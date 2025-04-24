@@ -17,7 +17,7 @@ public class DatabaseInsert {
 
 
     public static void main(String[] args) {
-        printEverything();
+       printEverything();
     }
     public static void printEverything(){
         Student.printStudents(studentObjects);
@@ -27,7 +27,6 @@ public class DatabaseInsert {
         Course.printCourses(courseObjects);
         Class.printClasses(classObjects);
         Roster.printRosters(rosterObjects);
-        generateAssignments();
         generateGrades();
     }
     public static ArrayList<Student> generateStudents(){
@@ -192,31 +191,19 @@ public class DatabaseInsert {
                 if (j < 12) { // MINOR ASSESSMENTS
                     Assignment newAssignment = new Assignment(assignment_counter, "Assignment" + j, tempClass.getClass_id(), 1);
                     assignments.add(newAssignment);
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 1 );");
                 }
                 else { // MAJOR ASSESSMENTS
                     Assignment newAssignment = new Assignment(assignment_counter, "Assignment" + j, tempClass.getClass_id(), 2);
                     assignments.add(newAssignment);
+                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempClass.getClass_id() + ", 2 );");
                 }
                 assignment_counter++;
             }
         }
         return assignments;
     }
-    public static void generateAssignments(){
-        int assignment_counter = 0;
-        for (int i = 0; i < assignmentObjects.size(); i++) {
-            Assignment tempAssignment = assignmentObjects.get(i);
-            for (int j = 0; j < 15; j++) {
-                if (j < 12) { // MINOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempAssignment.getClass_id() + ", 1 );");
-                }
-                else { // MAJOR ASSESSMENTS
-                    System.out.println("INSERT INTO Assignment ( assignment_id, title, class_id, assignment_type_id ) VALUES ( " + assignment_counter + ", 'Assignment" + j + "'" + ", " + tempAssignment.getClass_id() + ", 2 );");
-                }
-                assignment_counter++;
-            }
-        }
-    }
+
     public static void generateGrades(){
         int counter = 0;
         for (int i = 0; i < rosterObjects.size(); i++) {
