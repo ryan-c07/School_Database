@@ -12,7 +12,7 @@ public class DatabaseInsert {
     public static ArrayList<Student> studentObjects = generateStudents();
     public static ArrayList<Roster> rosterObjects = makeRosterArray();
     public static ArrayList<Room> totalRooms = generateRooms();
-    public static ArrayList<Assignment> assignmentObjects = makeAssignmentsArray();
+    public static ArrayList<Assignment> assignmentObjects = new ArrayList<>();
     public static ArrayList<Department> departmentObjects = new ArrayList<>();
 
 
@@ -27,6 +27,7 @@ public class DatabaseInsert {
         Course.printCourses(courseObjects);
         Class.printClasses(classObjects);
         Roster.printRosters(rosterObjects);
+        assignmentObjects = makeAssignmentsArray();
         generateGrades();
     }
     public static ArrayList<Student> generateStudents(){
